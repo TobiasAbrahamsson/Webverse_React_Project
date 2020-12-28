@@ -20,7 +20,7 @@ export default function Dashboard() {
 
     return (
         <div>
-            <h2>Profil</h2>
+            <h2>Profil boi</h2>
             {error && <p>{error}</p>}
             <strong>Email:</strong> {currentUser.email}
             <Link to="/update-profile">Update Profile</Link>
