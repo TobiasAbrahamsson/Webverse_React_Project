@@ -14,7 +14,7 @@ export default function UpdateProfile() {
   function handleSubmit(e) {
     e.preventDefault()
 
-    //Kollar så att lösenorder inte är olika.
+    // Kollar så att lösenorder inte är olika.
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Lösenorden matchar inte")
     }
@@ -23,12 +23,12 @@ export default function UpdateProfile() {
     setLoading(true)
     setError("")
 
-    //Kollar så att den nya mailen inte är den samma som den nuvarnade.
+    // Kollar så att den nya mailen inte är den samma som den nuvarnade.
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value))
     }
 
-    //Kollar så att lösenord spalten inte lämnas tom.
+    // Kollar så att lösenord spalten inte lämnas tom.
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value))
     }
