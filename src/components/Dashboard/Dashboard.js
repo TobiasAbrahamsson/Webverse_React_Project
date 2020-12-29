@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import Sidebar from '../Sidebar/Sidebar'
 
 export default function Dashboard() {
     const [error, setError] = useState("")
@@ -20,6 +21,7 @@ export default function Dashboard() {
 
     return (
         <div>
+            <Sidebar />
             <h2>Profil</h2>
             {error && <p>{error}</p>}
             <strong>Email:</strong> {currentUser.email}
@@ -28,4 +30,3 @@ export default function Dashboard() {
         </div>
     )
 }
-

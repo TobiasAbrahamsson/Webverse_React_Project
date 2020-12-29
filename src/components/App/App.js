@@ -4,6 +4,7 @@ import Login from '../Login/Login'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import ForgotPassword from '../ForgotPassword/ForgotPassword'
 import UpdateProfile from '../UpdateProfile/UpdateProfile'
+import Services from '../Services/Services'
 
 import {
   BrowserRouter as Router,
@@ -20,6 +21,7 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/" component={Dashboard} />
             <PrivateRoute path="/update-profile" component={UpdateProfile} />
+            <PrivateRoute path="/services" component={Services} />
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />
           </Switch>
