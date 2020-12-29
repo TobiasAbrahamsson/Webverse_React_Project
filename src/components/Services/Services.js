@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import firebase from '../Firebase/Firebase'
-import Sidebar from '../Sidebar/Sidebar'
-
 export default function Services() {
     const [services, setServices] = useState([])
     const [loading, setLoading] = useState(false)
@@ -32,7 +30,6 @@ export default function Services() {
 
     return (
         <div>
-            <Sidebar />
             <h2>Tjänster</h2>
             {services.map((service) => (
                 <div key={service.id}>
