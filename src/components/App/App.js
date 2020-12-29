@@ -8,14 +8,16 @@ import {
 // Layouts
 import MainLayout from '../../layouts/MainLayout'
 import LoginLayout from '../../layouts/LoginLayout'
+import ProjectLayout from '../../layouts/ProjectLayout'
 
 // Components
 import Dashboard from '../Dashboard/Dashboard'
 import Login from '../Login/Login'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import ForgotPassword from '../ForgotPassword/ForgotPassword'
-import UpdateProfile from '../UpdateProfile/UpdateProfile'
 import Services from '../Services/Services'
+import Account from '../Account/Account'
+import Overview from '../Overview/Overview'
 
 import { AuthProvider } from '../../contexts/AuthContext'
 
@@ -25,20 +27,26 @@ function App() {
       <div>
         <AuthProvider>
           <Switch>
-            <PrivateRoute exact path="/" render={() => (
+            <Route exact path="/" render={() => (
               <MainLayout>
                 <Dashboard />
               </MainLayout>
             )} />
-            <PrivateRoute path="/update-profile" render={() => (
+            <Route exact path="/account" render={() => (
               <MainLayout>
-                <UpdateProfile />
+                <Account />
               </MainLayout>
             )} />
-            <PrivateRoute path="/services" render={() => (
-              <MainLayout>
+
+            <Route exact path="/:id/overview" render={() => (
+              <ProjectLayout>
+                <Overview />
+              </ProjectLayout>
+            )} />
+            <Route path="/:id/services" render={() => (
+              <ProjectLayout>
                 <Services />
-              </MainLayout>
+              </ProjectLayout>
             )} />
             
             <Route path="/login" render={() => (
