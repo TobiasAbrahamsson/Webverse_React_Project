@@ -1,32 +1,60 @@
-import React, { useState } from 'react'
-import { useAuth } from '../../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
-import Sidebar from '../Sidebar/Sidebar'
+import React, { useState, useEffect } from 'react'
+import firebase from '../Firebase/Firebase'
+import { Link } from "react-router-dom"
 
 export default function Dashboard() {
-    const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
-    const history = useHistory()
+    var user = firebase.auth().currentUser
+    console.log(user)
+    console.log(user.uid)
 
-    async function handleLogout() {
-        setError("")
+    const [websites, setWebsites] = useState([])
+    const [loading, setLoading] = useState(false)
 
-        try {
-            await logout()
-            history.pushState("/")
-        } catch {
-            setError("Utloggningen misslyckades")
-        }
+    const ref = firebase.firestore().collection("users").doc(user.uid.toString()).collection("websites")
+    console.log(ref)
+
+    function getWebsites() {
+        setLoading(true)
+        ref.onSnapshot((querySnapshot) =>  {
+            const items = []
+            querySnapshot.forEach((doc) =>{
+                items.push(doc.data())
+            })
+            setWebsites(items)
+            setLoading(false)
+        })
     }
+
+    useEffect(() => {
+        getWebsites()
+    }, [])
+
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
+    
+    const statusColor = [
+        {background: "green"},
+        {background: "orange"},
+        {background: "red"}
+    ]
+
+    console.log(statusColor[0])
 
     return (
         <div>
-            <Sidebar />
-            <h2>Profil</h2>
-            {error && <p>{error}</p>}
-            <strong>Email:</strong> {currentUser.email}
-            <Link to="/update-profile">Update Profile</Link>
-            <button onClick={handleLogout}>Logga ut</button>
+            Webbsidor
+            {websites.map((website) => (
+                <div key={website.id}>
+                    <div className="websitesCard">
+                        <h2>{website.title}</h2>
+                        <p>{website.url}</p>
+                        <p>{website.status}</p>
+                        <div className="websiteStatus" style={statusColor[website.status]}></div>
+                        <Link to={website.id+"/overview"}>Hantera</Link>
+                    </div>
+                </div>
+            ))}
         </div>
     )
 }

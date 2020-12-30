@@ -8,4 +8,35 @@
 .sidebar {
   background: lightcyan;
 }
+
+.header {
+  background: lightgreen;
+}
+
+.accountMenu {
+  background: lightsalmon;
+  width: 300px;
+  position: absolute;
+  right: 30px;
+}
+
+.accountNav {
+  background: lightseagreen;
+}
+
+.websitesCard {
+  background: lightslategrey;
+  width: 450px;
+  margin: 10px;
+}
+
+.websitesCard .websiteStatus {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+}
+
+.projectSidebar {
+  background: lightpink;
+}
 /*# sourceMappingURL=style.css.map */
