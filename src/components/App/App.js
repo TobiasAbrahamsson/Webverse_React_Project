@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom'
 
 // Layouts
-import MainLayout from '../../layouts/MainLayout'
-import LoginLayout from '../../layouts/LoginLayout'
-import ProjectLayout from '../../layouts/ProjectLayout'
+//import MainLayout from '../../layouts/MainLayout'
+//import LoginLayout from '../../layouts/LoginLayout'
+//import ProjectLayout from '../../layouts/ProjectLayout'
 
 // Components
 import Dashboard from '../Dashboard/Dashboard'
@@ -27,38 +27,16 @@ function App() {
       <div>
         <AuthProvider>
           <Switch>
-            <Route exact path="/" render={() => (
-              <MainLayout>
-                <Dashboard />
-              </MainLayout>
-            )} />
-            <Route exact path="/account" render={() => (
-              <MainLayout>
-                <Account />
-              </MainLayout>
-            )} />
 
-            <Route exact path="/:id/overview" render={() => (
-              <ProjectLayout>
-                <Overview />
-              </ProjectLayout>
-            )} />
-            <Route path="/:id/services" render={() => (
-              <ProjectLayout>
-                <Services />
-              </ProjectLayout>
-            )} />
+            <PrivateRoute exact path="/" component={Dashboard} />
+            <PrivateRoute exact path="/account" component={Account} />
+
+            <PrivateRoute exact path="/:id/overview" component={Overview} />
+            <PrivateRoute exact path="/:id/services" component={Services} />
+
+            <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
             
-            <Route path="/login" render={() => (
-              <LoginLayout>
-                <Login />
-              </LoginLayout>
-            )} />
-            <Route path="/forgot-password" render={() => (
-              <LoginLayout>
-                <ForgotPassword />
-              </LoginLayout>
-            )} />
           </Switch>
         </AuthProvider>
       </div>
