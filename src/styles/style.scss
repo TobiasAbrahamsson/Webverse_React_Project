@@ -1,4 +1,9 @@
 @import './reset';
 @import './variables';
 
-@import '../components/Sidebar/Sidebar'
+@import '../components/Sidebar/Sidebar';
+@import '../components/Header/Header';
+@import '../components/AccountMenu/AccountMenu';
+@import '../components/AccountNav/AccountNav';
+@import '../components/Dashboard/Dashboard';
+@import '../components/ProjectSidebar/ProjectSidebar';
