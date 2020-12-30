@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import firebase from '../Firebase/Firebase'
 import { Link } from "react-router-dom"
+import Sidebar from '../Sidebar/Sidebar'
+import Header from '../Header/Header'
 
 export default function Dashboard() {
     var user = firebase.auth().currentUser
@@ -43,6 +45,8 @@ export default function Dashboard() {
 
     return (
         <div>
+            <Sidebar />
+            <Header />
             Webbsidor
             {websites.map((website) => (
                 <div key={website.id}>

@@ -29,10 +29,10 @@ function App() {
           <Switch>
 
             <PrivateRoute exact path="/" component={Dashboard} />
-            <PrivateRoute exact path="/account" component={Account} />
+            <PrivateRoute path="/account" component={Account} />
 
-            <PrivateRoute exact path="/:id/overview" component={Overview} />
-            <PrivateRoute exact path="/:id/services" component={Services} />
+            <PrivateRoute path="/:id/overview" component={Overview} />
+            <PrivateRoute path="/:id/services" component={Services} />
 
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />
