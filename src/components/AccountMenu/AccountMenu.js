@@ -12,7 +12,8 @@ export default function AccountMenu() {
 
         try {
             await logout()
-            history.pushState("/")
+            history.push("/login")
+            window.location.reload();
         } catch {
             setError("Utloggningen misslyckades")
         }
@@ -24,6 +25,7 @@ export default function AccountMenu() {
             <br/>
             {error && <p>{error}</p>}
             {currentUser.email}
+            <Link to="/account"><li>Account</li></Link>
             <Link to="/account/personal-information"><li>Personlig information</li></Link>
             <Link to="/account/security"><li>Säkerhet</li></Link>
             <button onClick={handleLogout}>Logga ut</button>

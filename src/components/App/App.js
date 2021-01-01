@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 // Layouts
-//import MainLayout from '../../layouts/MainLayout'
+import MainLayout from '../../layouts/MainLayout'
 //import LoginLayout from '../../layouts/LoginLayout'
 //import ProjectLayout from '../../layouts/ProjectLayout'
 
@@ -28,15 +28,27 @@ function App() {
         <AuthProvider>
           <Switch>
 
-            <PrivateRoute exact path="/" component={Dashboard} />
-            <PrivateRoute path="/account" component={Account} />
-
-            <PrivateRoute path="/:id/overview" component={Overview} />
-            <PrivateRoute path="/:id/services" component={Services} />
-
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />
-            
+
+            <Route path='/:path?' exact>
+              <MainLayout>
+                <Switch>
+                  <PrivateRoute exact path="/" component={Dashboard} />
+                  <PrivateRoute path="/account" component={Account} />
+                </Switch>
+              </MainLayout>
+            </Route>
+
+            <Route path='/:id/:path?' exact>
+              <MainLayout>
+                <Switch>
+                  <PrivateRoute path="/:id/overview" component={Overview} />
+                  <PrivateRoute path="/:id/services" component={Services} />
+                </Switch>
+              </MainLayout>
+            </Route>
+
           </Switch>
         </AuthProvider>
       </div>
