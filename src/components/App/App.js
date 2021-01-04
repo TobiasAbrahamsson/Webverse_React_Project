@@ -8,7 +8,7 @@ import {
 // Layouts
 import MainLayout from '../../layouts/MainLayout'
 //import LoginLayout from '../../layouts/LoginLayout'
-//import ProjectLayout from '../../layouts/ProjectLayout'
+import ProjectLayout from '../../layouts/ProjectLayout'
 
 // Components
 import Dashboard from '../Dashboard/Dashboard'
@@ -41,12 +41,12 @@ function App() {
             </Route>
 
             <Route path='/:id/:path?' exact>
-              <MainLayout>
+              <ProjectLayout>
                 <Switch>
                   <PrivateRoute path="/:id/overview" component={Overview} />
                   <PrivateRoute path="/:id/services" component={Services} />
                 </Switch>
-              </MainLayout>
+              </ProjectLayout>
             </Route>
 
           </Switch>
