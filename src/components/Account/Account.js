@@ -1,13 +1,13 @@
 import React from 'react'
 import {
     BrowserRouter as Router,
-    Switch,
-    Route
+    Switch
 } from 'react-router-dom'
 
 import AccountNav from '../AccountNav/AccountNav'
 import PersonalInformation from '../PersonalInformation/PersonalInformation'
 import Security from '../Security/Security'
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
 
 export default function Account() {
     return (
@@ -15,8 +15,8 @@ export default function Account() {
             <div>
                 <AccountNav />
                 <Switch>
-                    <Route path="/account/personal-information" component={PersonalInformation} />
-                    <Route path="/account/security" component={Security} />
+                    <PrivateRoute path="/account/personal-information" component={PersonalInformation} />
+                    <PrivateRoute path="/account/security" component={Security} />
                 </Switch>
             </div>
         </Router>
