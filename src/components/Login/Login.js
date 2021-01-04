@@ -25,16 +25,16 @@ export default function Login() {
     setLoading(false)
   }
 
-    return (
-        <div>
-            <h2>Logga in</h2>
-            {error && <p>{error}</p>}
-            <form onSubmit={handleSubmit}>
-                <input type="email" ref={emailRef} required />
-                <input type="password" ref={passwordRef} required />
-                <button disabled={loading} type="submit">Logga in</button>
-            </form>
-            <Link to="/forgot-password">Glömt Lösenord?</Link>
-        </div>
-    )
+  return (
+    <div>
+      <h2>Logga in</h2>
+      {error && <p>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <input type="email" ref={emailRef} required />
+        <input type="password" ref={passwordRef} required />
+        <button disabled={loading} type="submit">Logga in</button>
+      </form>
+      <Link to="/forgot-password">Glömt Lösenord?</Link>
+    </div>
+  )
 }
