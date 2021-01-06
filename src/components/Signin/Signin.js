@@ -1,37 +1,38 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
+import { useHistory } from 'react-router-dom'
 
-export default function ForgotPassword() {
+export default function Signin() {
    const emailRef = useRef()
-   const { resetPassword } = useAuth()
+   const passwordRef = useRef()
+   const { signin } = useAuth()
    const [error, setError] = useState("")
-   const [message, setMessage] = useState("")
    const [loading, setLoading] = useState(false)
+   const history = useHistory()
 
    async function handleSubmit(e) {
       e.preventDefault()
 
       try {
-         setMessage("")
          setError("")
          setLoading(true)
-         await resetPassword(emailRef.current.value)
-         setMessage("Kolla din mail för vidare instruktioner")
+         await signin(emailRef.current.value, passwordRef.current.value)
+         history.push("/")
       } catch {
-         setError("Lösenordsåterställningen misslyckades")
+         setError("Inloggningen misslyckades")
       }
 
       setLoading(false)
    }
 
    return (
-      <div className="forgotPassword">
-         <h2>Nytt Lösenord</h2>
+      <div className="signin">
+         <h2>Logga in</h2>
          {error && <p>{error}</p>}
-         {message && <p>{message}</p>}
          <form onSubmit={handleSubmit}>
             <input type="email" ref={emailRef} required />
-            <button disabled={loading} type="submit">Nytt lösenord</button>
+            <input type="password" ref={passwordRef} required />
+            <button disabled={loading} type="submit">Logga in</button>
          </form>
       </div>
    )

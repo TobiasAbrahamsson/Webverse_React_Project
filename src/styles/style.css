@@ -39,4 +39,72 @@
 .projectSidebar {
   background: lightpink;
 }
+
+.signin {
+  background: lightskyblue;
+}
+
+.forgotPassword {
+  background: lightgreen;
+}
+
+.services {
+  background: lightpink;
+}
+
+.services .switch {
+  position: relative;
+  display: block;
+  width: 70px;
+  height: 30px;
+}
+
+.services .switch input {
+  display: none;
+}
+
+.services .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border: 3px solid white;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.services .slider:before {
+  position: absolute;
+  content: "";
+  top: 1px;
+  left: 1px;
+  background-color: white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.services input:checked + .slider {
+  background-color: none;
+}
+
+.services input:checked + .slider:before {
+  -webkit-transform: translateX(40px);
+          transform: translateX(40px);
+  background: white;
+}
+
+.services .slider.round {
+  border-radius: 35px;
+}
+
+.services .slider.round:before {
+  width: 22px;
+  height: 22px;
+  border-radius: 20px;
+}
 /*# sourceMappingURL=style.css.map */

@@ -1,9 +1,12 @@
-@import './reset';
-@import './variables';
+@import "./reset";
+@import "./variables";
 
-@import '../components/Sidebar/Sidebar';
-@import '../components/Header/Header';
-@import '../components/AccountMenu/AccountMenu';
-@import '../components/AccountNav/AccountNav';
-@import '../components/Dashboard/Dashboard';
-@import '../components/ProjectSidebar/ProjectSidebar';
+@import "../components/Sidebar/Sidebar";
+@import "../components/Header/Header";
+@import "../components/AccountMenu/AccountMenu";
+@import "../components/AccountNav/AccountNav";
+@import "../pages/Home/Home";
+@import "../components/ProjectSidebar/ProjectSidebar";
+@import "../components/Signin/Signin";
+@import "../components/ForgotPassword/ForgotPassword";
+@import "../pages/Services/Services";
