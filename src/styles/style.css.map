@@ -13,7 +13,8 @@
         "../components/ProjectSidebar/_ProjectSidebar.scss",
         "../components/Signin/_Signin.scss",
         "../components/ForgotPassword/_ForgotPassword.scss",
-        "../pages/Services/_Services.scss"
+        "../pages/Services/_Services.scss",
+        "../components/ServiceCard/_ServiceCard.scss"
     ],
     "names": [],
     "file": "style.css"

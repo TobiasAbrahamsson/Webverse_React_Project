@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../../components/Firebase/Firebase";
+import ServiceCard from "../../components/ServiceCard/ServiceCard";
 
 class Services extends Component {
    state = {
@@ -61,20 +62,16 @@ class Services extends Component {
 
             {
                this.state.services &&
-               this.state.services.map(service => {
-                  return (
-                     <div key={service.id}>
-                        <h2>{service.title}</h2>
-
-                        {this.state.visible ?
-                           <p>{service.price * 10 * service.discountYear + " /år"}</p>
-                           :
-                           <p>{service.price * service.discountMonth + " /mån"}</p>
-                        }
-
-                     </div>
-                  )
-               })
+               this.state.services.map(service =>
+                  <ServiceCard
+                     id={service.id}
+                     title={service.title}
+                     description={service.description}
+                     priceYear={service.priceYear}
+                     priceMonth={service.priceMonth}
+                     visible={this.state.visible}
+                  />
+               )
             }
          </div>
       )
