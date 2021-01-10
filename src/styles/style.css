@@ -107,4 +107,13 @@
   height: 22px;
   border-radius: 20px;
 }
+
+.personalInformation #profileImageUpload {
+  display: none;
+}
+
+.personalInformation #profileImage {
+  height: 300px;
+  width: 300px;
+}
 /*# sourceMappingURL=style.css.map */

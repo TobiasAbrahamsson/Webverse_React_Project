@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 export default function Security() {
    const emailRef = useRef()
@@ -51,11 +51,10 @@ export default function Security() {
          {error && <p>{error}</p>}
          <form onSubmit={handleSubmit}>
             <input type="email" ref={emailRef} required defaultValue={currentUser.email} />
-            <input type="password" ref={passwordRef} placeholder="Leave blank to keep the same" />
-            <input type="password" ref={passwordConfirmRef} placeholder="Leave blank to keep the same" />
+            <input type="password" ref={passwordRef} placeholder="Lämna blankt för att behålla nuvarande" autocomplete="new-password" />
+            <input type="password" ref={passwordConfirmRef} placeholder="Lämna blankt för att behålla nuvarande" />
             <button disabled={loading} type="submit">Uppdatera</button>
          </form>
-         <Link to="/">Avbryt</Link>
       </div>
    )
 }

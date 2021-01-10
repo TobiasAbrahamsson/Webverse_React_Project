@@ -40,6 +40,7 @@ export default function Home() {
    ]
 
    console.log(statusColor[0])
+   console.log(websites)
 
    return (
       <div>

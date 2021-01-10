@@ -6,20 +6,23 @@ import {
 } from "react-router-dom";
 
 // Layouts
-//import LoginLayout from "../../layouts/LoginLayout";
+import LoginLayout from "../../layouts/LoginLayout";
 import MainLayout from "../../layouts/MainLayout";
 import ProjectLayout from "../../layouts/ProjectLayout";
+import AccountLayout from "../../layouts/AccountLayout";
 
 // Pages
 import Login from "../../pages/Login/Login";
 import Home from "../../pages/Home/Home";
-import Account from "../../pages/Account/Account";
 import Overview from "../../pages/Overview/Overview";
 import Services from "../../pages/Services/Services";
+import Page404 from "../../pages/Page404/Page404"
 
 // Components
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
+//import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { AuthProvider } from "../../contexts/AuthContext";
+import PersonalInformation from "../PersonalInformation/PersonalInformation";
+import Security from "../Security/Security";
 
 function App() {
    return (
@@ -28,26 +31,47 @@ function App() {
             <AuthProvider>
                <Switch>
 
-                  <Route path="/login" component={Login} />
+                  {/* === Login layout === */}
+                  <Route exact path="/login" render={() => (
+                     <LoginLayout>
+                        <Login />
+                     </LoginLayout>
+                  )} />
 
-                  <Route path="/:path?" exact>
+                  {/* === Main layout === */}
+                  <Route exact path="/" render={() => (
                      <MainLayout>
-                        <Switch>
-                           <PrivateRoute exact path="/" component={Home} />
-                           <PrivateRoute path="/account" component={Account} />
-                        </Switch>
+                        <Home />
                      </MainLayout>
-                  </Route>
+                  )} />
 
-                  <Route path="/:id/:path?" exact>
+                  {/* === Account layout === */}
+                  <Route exact path="/account/personal-information" render={() => (
+                     <AccountLayout>
+                        <PersonalInformation />
+                     </AccountLayout>
+                  )} />
+                  <Route exact path="/account/security" render={() => (
+                     <AccountLayout>
+                        <Security />
+                     </AccountLayout>
+                  )} />
+
+                  {/* === Project layout === */}
+                  <Route exact path="/:id/overview" render={() => (
                      <ProjectLayout>
-                        <Switch>
-                           <PrivateRoute path="/:id/overview" component={Overview} />
-                           <PrivateRoute exact path="/:id/services" component={Services} />
-                           <PrivateRoute path="/:id/services/:filterType" component={Services} />
-                        </Switch>
+                        <Overview />
                      </ProjectLayout>
-                  </Route>
+                  )} />
+                  <Route exact path="/:id/services" render={() => (
+                     <ProjectLayout>
+                        <Services />
+                     </ProjectLayout>
+                  )} />
+
+                  <Route render={() => (
+                     <Page404 />
+                  )} />
 
                </Switch>
             </AuthProvider>
