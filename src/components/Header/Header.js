@@ -10,10 +10,14 @@ export default function Header() {
    const [cartSize, setCartSize] = useState("");
    const docRef = firebase.firestore().collection("users").doc(currentUser.uid).collection("cart")
 
+
    docRef.onSnapshot(snapshot => {
       console.log(snapshot.size)
       setCartSize(snapshot.size)
    });
+
+
+
 
    return (
       <div className="header">
