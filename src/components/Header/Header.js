@@ -1,26 +1,33 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import AccountMenu from '../AccountMenu/AccountMenu'
 import { Link } from 'react-router-dom'
+import firebase from "../../components/Firebase/Firebase";
+import { useAuth } from "../../contexts/AuthContext";
 
-class Header extends Component {
+export default function Header() {
+   const { currentUser } = useAuth()
+   const [visible, setVisible] = useState(false);
+   const [cartSize, setCartSize] = useState("");
+   const docRef = firebase.firestore().collection("users").doc(currentUser.uid).collection("cart")
 
-   state = {
-      visible: false
-   }
 
-   render() {
-      return (
-         <div className="header">
-            Header
-            <Link to="/cart">Cart</Link>
-            <button onClick={() => {
-               this.setState({ visible: !this.state.visible })
-            }}>My Account</button>
+   docRef.onSnapshot(snapshot => {
+      console.log(snapshot.size)
+      setCartSize(snapshot.size)
+   });
 
-            {this.state.visible ? <AccountMenu /> : null}
-         </div>
-      )
-   }
+
+
+
+   return (
+      <div className="header">
+         Header
+         <Link to="/cart">Cart - {cartSize}</Link>
+         <button onClick={() => {
+            setVisible(!visible)
+         }}>My Account</button>
+
+         {visible ? <AccountMenu /> : null}
+      </div>
+   )
 }
-
-export default Header
