@@ -16,6 +16,7 @@ import Login from "../../pages/Login/Login";
 import Home from "../../pages/Home/Home";
 import Overview from "../../pages/Overview/Overview";
 import Services from "../../pages/Services/Services";
+import Cart from "../../pages/Cart/Cart";
 import Page404 from "../../pages/Page404/Page404"
 
 // Components
@@ -42,6 +43,11 @@ function App() {
                   <Route exact path="/" render={() => (
                      <MainLayout>
                         <Home />
+                     </MainLayout>
+                  )} />
+                  <Route exact path="/cart" render={() => (
+                     <MainLayout>
+                        <Cart />
                      </MainLayout>
                   )} />
 

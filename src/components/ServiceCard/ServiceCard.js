@@ -1,26 +1,40 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { useAuth } from "../../contexts/AuthContext";
+import firebase from "../../components/Firebase/Firebase";
 
-class ServiceCard extends Component {
+export default function ServiceCard(props) {
+   const { currentUser } = useAuth()
 
-   render() {
-      return (
-         <div className="serviceCard" key={this.props.id}>
-            <h3>{this.props.title}</h3>
-            <p>{this.props.description[0]}</p>
-            <p>{this.props.description[1]}</p>
-            <p>{this.props.description[2]}</p>
+   function addToCart() {
 
-            {this.props.visible ?
-               <p>{this.props.priceYear + " /år"}</p>
-               :
-               <p>{this.props.priceMonth + " /mån"}</p>
-            }
+      const docRef = firebase.firestore().collection("users").doc(currentUser.uid).collection("cart").doc(props.id);
+      docRef.set({
+         id: props.id,
+         title: props.title,
+         priceMonth: props.priceMonth,
+         priceYear: props.priceYear,
+         price: props.priceMonth,
+         selected: null
+      })
 
-            <button>Välj tjänst</button>
-
-         </div>
-      )
+      console.log("Product added")
    }
-}
 
-export default ServiceCard;
+   return (
+      <div className="serviceCard" key={props.id}>
+         <h3>{props.title}</h3>
+         <p>{props.description[0]}</p>
+         <p>{props.description[1]}</p>
+         <p>{props.description[2]}</p>
+
+         {props.visible ?
+            <p>{props.priceYear + " /år"}</p>
+            :
+            <p>{props.priceMonth + " /mån"}</p>
+         }
+
+         <button onClick={addToCart}>Välj tjänst</button>
+
+      </div>
+   )
+}

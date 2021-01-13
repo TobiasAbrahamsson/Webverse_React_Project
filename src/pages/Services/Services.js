@@ -25,7 +25,7 @@ class Services extends Component {
       e.preventDefault();
 
       console.log("mounted");
-      const ref = firebase.firestore().collection("services").where("category", "==", e.target.value.toString());
+      const ref = firebase.firestore().collection("services").where("category", "==", e.target.value);
       ref.get().then(snapshot => {
          const services = []
          snapshot.forEach(doc => {
