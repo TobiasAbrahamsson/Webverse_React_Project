@@ -25,7 +25,7 @@ import { AuthProvider } from "../../contexts/AuthContext";
 import PersonalInformation from "../PersonalInformation/PersonalInformation";
 import Security from "../Security/Security";
 
-function App() {
+export default function App() {
    return (
       <Router>
          <div>
@@ -85,5 +85,3 @@ function App() {
       </Router>
    );
 };
-
-export default App;

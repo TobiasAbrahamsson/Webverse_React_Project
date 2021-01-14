@@ -14,14 +14,15 @@ export default function ServiceCard(props) {
          priceMonth: props.priceMonth,
          priceYear: props.priceYear,
          price: props.priceMonth,
-         selected: null
+         selected: null,
+         website: props.website
       })
 
       console.log("Product added")
    }
 
    return (
-      <div className="serviceCard" key={props.id}>
+      <div className="serviceCard">
          <h3>{props.title}</h3>
          <p>{props.description[0]}</p>
          <p>{props.description[1]}</p>

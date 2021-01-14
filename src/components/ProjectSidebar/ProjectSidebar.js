@@ -6,8 +6,8 @@ export default function ProjectSidebar() {
       <div className="projectSidebar">
          Project sidbar
          <br />
-         <Link to="/:id/overview">Översikt</Link>
-         <Link to="/:id/services">Tjänster</Link>
+         <Link to={"overview"}>Översikt</Link>
+         <Link to={"services"}>Tjänster</Link>
       </div>
    )
 }

@@ -6,7 +6,9 @@ import { useAuth } from "../../../contexts/AuthContext";
 export default function SubscriptionItems(props) {
    const { currentUser } = useAuth()
    const [checked, setChecked] = useState(null);
+   const [websiteInfo, setWebsiteInfo] = useState(null);
    const docRef = firebase.firestore().collection("users").doc(currentUser.uid).collection("cart").doc(props.id);
+   console.log(websiteInfo)
 
    function updatePrice(e) {
       const inputId = e.currentTarget.id
@@ -39,6 +41,17 @@ export default function SubscriptionItems(props) {
       if (props.selected != null) {
          setChecked(props.selected)
       }
+
+      const ref = firebase.firestore().collection("users").doc(currentUser.uid).collection("websites").where("id", "==", props.website);
+      console.log(props.website)
+
+      ref.onSnapshot((querySnapshot) => {
+         const items = []
+         querySnapshot.forEach((doc) => {
+            items.push(doc.data())
+         })
+         setWebsiteInfo(items[0].title)
+      })
    }
 
    useEffect(() => {
@@ -51,6 +64,7 @@ export default function SubscriptionItems(props) {
             id={props.id}
          />
          <h2 id="cartItemTitle">{props.title}</h2>
+         <h3>För: {websiteInfo || ""}</h3>
 
          {checked ?
             <form>

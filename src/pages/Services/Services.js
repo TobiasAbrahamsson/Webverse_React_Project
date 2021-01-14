@@ -1,27 +1,31 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "../../components/Firebase/Firebase";
 import ServiceCard from "../../components/ServiceCard/ServiceCard";
 
-class Services extends Component {
-   state = {
-      services: null,
-      visible: false
-   }
+export default function Services() {
+   const [services, setServices] = useState(null);
+   const [visible, setVisible] = useState(false);
+   const ref = firebase.firestore().collection("services");
+   const websiteId = window.location.pathname.split('/')[1]
+   console.log(websiteId)
+   console.log(websiteId)
 
-   componentDidMount() {
-      console.log("mounted");
-      const ref = firebase.firestore().collection("services");
+   function getAllServices() {
       ref.get().then(snapshot => {
          const services = []
          snapshot.forEach(doc => {
             const data = doc.data()
             services.push(data)
          })
-         this.setState({ services: services })
+         setServices(services)
       }).catch(error => console.log(error))
    }
 
-   getServices(e) {
+   useEffect(() => {
+      getAllServices()
+   }, [])
+
+   function getServices(e) {
       e.preventDefault();
 
       console.log("mounted");
@@ -32,50 +36,40 @@ class Services extends Component {
             const data = doc.data()
             services.push(data)
          })
-         this.setState({ services: services })
+         setServices(services)
       }).catch(error => console.log(error))
    }
 
-   render() {
-      return (
-         <div className="services">
-            Services
-            <button onClick={this.componentDidMount.bind(this)}>Alla</button>
-            <button onClick={this.getServices.bind(this)} value="hosting">Hosting</button>
-            <button onClick={this.getServices.bind(this)} value="marketing">Marketing</button>
-            <button onClick={this.getServices.bind(this)} value="maintenance">Maintenance</button>
+   return (
+      <div className="services">
+         Services
+         <button onClick={getAllServices}>Alla</button>
+         <button onClick={getServices} value="hosting">Hosting</button>
+         <button onClick={getServices} value="marketing">Marketing</button>
+         <button onClick={getServices} value="maintenance">Maintenance</button>
 
-            <p>Betala månadsvis</p>
-            <label className="switch">
-               <input onClick={() => { this.setState({ visible: !this.state.visible }) }} type="checkbox" />
-               <span className="slider round"></span>
-            </label>
-            <p>Betala årligen <span>- få 2 månader gratis!</span></p>
+         <p>Betala månadsvis</p>
+         <label className="switch">
+            <input onClick={() => { setVisible(!visible) }} type="checkbox" />
+            <span className="slider round"></span>
+         </label>
+         <p>Betala årligen <span>- få 2 månader gratis!</span></p>
 
-            <button onClick={() => { this.setState({ visible: !this.state.visible }) }}>
-               {this.state.visible ?
-                  "Month"
-                  :
-                  "Year"
-               }
-            </button>
-
-            {
-               this.state.services &&
-               this.state.services.map(service =>
-                  <ServiceCard
-                     id={service.id}
-                     title={service.title}
-                     description={service.description}
-                     priceYear={service.priceYear}
-                     priceMonth={service.priceMonth}
-                     visible={this.state.visible}
-                  />
-               )
-            }
-         </div>
-      )
-   }
+         {
+            services &&
+            services.map(service =>
+               <ServiceCard
+                  key={service.id}
+                  id={service.id + websiteId}
+                  website={websiteId}
+                  title={service.title}
+                  description={service.description}
+                  priceYear={service.priceYear}
+                  priceMonth={service.priceMonth}
+                  visible={visible}
+               />
+            )
+         }
+      </div>
+   )
 }
-
-export default Services

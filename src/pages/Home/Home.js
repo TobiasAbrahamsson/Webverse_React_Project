@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import firebase from '../../components/Firebase/Firebase'
-import { Link } from "react-router-dom"
+import WebsiteCard from '../../components/WebsiteCard/WebsiteCard'
 
 export default function Home() {
    var user = firebase.auth().currentUser
@@ -33,27 +33,17 @@ export default function Home() {
       return <h1>Loading...</h1>
    }
 
-   const statusColor = [
-      { background: "green" },
-      { background: "orange" },
-      { background: "red" }
-   ]
-
-   console.log(statusColor[0])
-   console.log(websites)
-
    return (
       <div>
-         Webbsidor
          {websites.map((website) => (
-            <div key={website.id}>
-               <div className="websitesCard">
-                  <h2>{website.title}</h2>
-                  <p>{website.url}</p>
-                  <p>{website.status}</p>
-                  <div className="websiteStatus" style={statusColor[website.status]}></div>
-                  <Link to={website.id + "/overview"}>Hantera</Link>
-               </div>
+            <div>
+               <WebsiteCard
+                  key={website.id}
+                  id={website.id}
+                  title={website.title}
+                  url={website.url}
+                  status={website.status}
+               />
             </div>
          ))}
       </div>
